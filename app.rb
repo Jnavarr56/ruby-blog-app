@@ -8,7 +8,8 @@ require './models/interact.rb'
 require './models/post.rb'
 require './models/hashtag.rb'
 require './models/hashtag_join.rb'
-require "securerandom"
+require 'securerandom'
+require 'pony'
 
 
 
@@ -82,6 +83,13 @@ post "/signup-data-portal" do
             end
         end
         Account.create(first_name: 'not set', last_name: 'not set', email: user_input[:new_username_input], password: user_input[:new_password_input], dob: user_input[:new_dob_input], last_accessed: 'n/a', time_logged: 'n/a', verify_code: verify_code_string, verified: false)
+        Pony.mail(
+            :body => 'test',
+            :html_body => 'What do you know, Joe?',
+            :attachments => {"foo.txt" => "content of foo.txt"},
+            :body_part_header => { content_disposition: "inline" }
+        )
+
 
         ##GENERATE CODE AND EMAIL WHICH LINKS TO A ROUTE THAT WILL TAKE THE VERIFY CODE AS A PARAM AND UPDATE THE ACCOUNT AS VERIFIED
     end
