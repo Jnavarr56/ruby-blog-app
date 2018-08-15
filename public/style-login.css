@@ -1,0 +1,244 @@
+@import url("https://fonts.googleapis.com/css?family=Comfortaa");
+body {
+  background: linear-gradient(to left, #396afc, #2948ff);
+  background-size: 400% 400%;
+  animation: gradientShift 3s ease 0s infinite; }
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%; }
+  50% {
+    background-position: 100% 50%; }
+  100% {
+    background-position: 0% 50%; } }
+nav {
+  position: fixed;
+  top: 0;
+  right: 100px;
+  height: 50px;
+  width: 100px;
+  background-color: rgba(255, 0, 0, 0.8);
+  border-radius: 0 0 15px 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center; }
+  nav img {
+    height: 40px;
+    width: 40px; }
+
+form {
+  height: 400px;
+  width: 700px;
+  margin: 0 auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 25%;
+  border-radius: 15px;
+  overflow: hidden;
+  background-color: rgba(255, 0, 0, 0.8);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+  form .row {
+    height: 33%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    position: relative; }
+    form .row button {
+      font-family: "Comfortaa";
+      color: red;
+      position: absolute;
+      background-color: white;
+      border-style: none;
+      border-radius: 10px;
+      height: 40px;
+      width: 80px; }
+    form .row button:focus {
+      outline-style: none; }
+    form .row .bottom {
+      bottom: 110px; }
+    form .row .signUp {
+      left: 55%; }
+    form .row .logIn {
+      right: 55%; }
+  form .row:nth-of-type(1) {
+    justify-content: flex-start;
+    padding-left: 25px; }
+    form .row:nth-of-type(1) h1 {
+      color: white;
+      font-size: 200%;
+      font-family: "Comfortaa"; }
+
+.shrinkGrow {
+  animation: shrinkGrowAnim 2s ease 0s 1 forwards; }
+
+@keyframes shrinkGrowAnim {
+  0% {
+    height: 400px; }
+  50% {
+    height: 100px; }
+  100% {
+    top: 10%;
+    height: 600px; } }
+.growShrink {
+  animation: growShrinkAnim 2s ease 0s 1 forwards; }
+
+@keyframes growShrinkAnim {
+  0% {
+    top: 10%;
+    height: 600px; }
+  50% {
+    top: 7.5%;
+    height: 100px; }
+  100% {
+    top: 25%;
+    height: 400px; } }
+#logInFields {
+  height: 100%;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: space-evenly;
+  position: absolute;
+  margin: 0 auto; }
+
+.loginFieldsRow {
+  height: 50%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center; }
+
+.swapOutLogIn {
+  left: 0%;
+  animation: swapOutLoginAnim .25s linear 0s 1 forwards; }
+
+@keyframes swapOutLoginAnim {
+  0% {
+    left: 0%; }
+  100% {
+    left: -100%; } }
+.swapInLogIn {
+  left: -100%;
+  animation: swapInLoginAnim .25s linear 1.75s 1 forwards; }
+
+@keyframes swapInLoginAnim {
+  0% {
+    left: -100%; }
+  100% {
+    left: 0%;
+    right: 0%; } }
+#signUpFields {
+  height: 100%;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: space-evenly;
+  position: absolute;
+  right: -200%;
+  margin: 0 auto; }
+
+.signupFieldsRow {
+  height: 50%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center; }
+
+.signupFieldsRow:nth-child(2) {
+  padding-left: 35px; }
+
+.signupFieldsRow:nth-child(1) {
+  padding-left: 7.5px; }
+
+.swapInSignUp {
+  right: -100%;
+  animation: swapInSignupAnim .25s linear 1.75s 1 forwards; }
+
+@keyframes swapInSignupAnim {
+  0% {
+    right: -100%; }
+  100% {
+    right: 0%;
+    left: 0%; } }
+.swapOutSignUp {
+  right: 0%;
+  animation: swapOutSignupAnim .25s linear 0s 1 forwards; }
+
+@keyframes swapOutSignupAnim {
+  0% {
+    right: 0%;
+    left: 0%; }
+  100% {
+    right: -100%; } }
+h3 {
+  color: white;
+  font-size: 150%;
+  font-family: "Comfortaa"; }
+
+input {
+  height: 20px;
+  width: 30%;
+  border-style: none;
+  border-radius: 15px;
+  text-indent: 10px;
+  font-family: "Comfortaa"; }
+
+h6 {
+  font-family: "Comfortaa";
+  color: white;
+  position: absolute;
+  top: 112px;
+  left: 50%; }
+
+input:focus {
+  outline-style: none; }
+
+#togglePassword {
+  position: absolute;
+  top: 135px;
+  left: 45%;
+  margin: 0 auto;
+  z-index: 1000; }
+
+.shakeLogIn {
+  left: 0%;
+  right: 0%;
+  animation: shakeLogInAnim .25s linear 0s 1; }
+
+@keyframes shakeLogInAnim {
+  0% {
+    left: 0%; }
+  25% {
+    left: -7.5%; }
+  75% {
+    left: 7.5%; }
+  100% {
+    left: 0%;
+    right: 0%; } }
+.leftEmpty {
+  animation: leftEmptyAnim 1s linear 0s 1; }
+
+@keyframes leftEmptyAnim {
+  0% {
+    color: white; }
+  25% {
+    color: blue; }
+  50% {
+    color: white; }
+  75% {
+    color: blue; }
+  100% {
+    color: white; } }
+
+/*# sourceMappingURL=style-login.css.map */

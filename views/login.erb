@@ -1,0 +1,45 @@
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+    <link rel="stylesheet" href="style-login.css">
+</head>
+<body>
+<nav><a href = "https://github.com/Jnavarr56"><img src = "github-logo.png"></a></nav>
+<form id = "mainForm">
+    <div class = "row">
+        <h1 id = "title"></h1>
+    </div>
+    <div class = "row">
+        <div id = "loginFields">
+            <div class = "loginFieldsRow"><h3>username:</h3><input id = "username_input"></div>
+            <div class = "loginFieldsRow"><h3>password:</h3><input id = "pwd" type = "password" name = "password_input"></div>
+            <input type = "checkbox" id = "togglePassword"><h6>view password</h6>
+        </div>
+        <div id = "signUpFields">
+            <div class = "signupFieldsRow"><h3>date of birth:</h3><input id = "dob" name = "dob_input" type = "date"></div>
+            <div class = "signupFieldsRow"><h3>email:</h3><input  id = "new_username" placeholder = "valid email" name = "email_input"></div>
+            <div class = "signupFieldsRow"><h3>new password:</h3><input id = "new_password" placeholder = "new password" type = "password" name = "new_password_input"></div>
+        </div>
+    </div>
+    <div class = "row">
+        <button id = "goButton" class = "logIn" type = "submit">go</button>
+        <button id = "signUpButton" class = "signUp">sign up</button>
+    </div>
+</form>
+
+
+<!-- particles.js container --> 
+<div id="particles-js"></div> 
+<!-- stats - count particles -->
+<div class="count-particles"> 
+<span class="js-count-particles">--</span> particles </div> 
+<!-- particles.js lib - https://github.com/VincentGarreau/particles.js -->
+<script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<!-- stats.js lib --> <script src="http://threejs.org/examples/js/libs/stats.min.js"></script>
+<script type = "text/javascript" src="script-login.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<style>
+ .count-particles{display: none !important;}
+</style>
+</body>
