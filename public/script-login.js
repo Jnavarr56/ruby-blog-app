@@ -86,9 +86,11 @@ document.getElementById("goButton").addEventListener("click", (event)=>{
             else if (response.data.error === "ERROR NOT VERIFIED") {
                 shakeLogIn("unverified");
                 console.log(response);
-
             }
-            //<----ON BACK END, CHECK FOR IF VERIFIED, IF IT IS REDIRECT TO MAIN, ELSE REDIRECT TO A SEPARATE PAGE WITH INSTRUCTIONS TO CHECK EMAIL*********
+            else if (response.data.error === "NO ERROR"){
+                console.log(response);
+                window.location = "/dashboard"
+            }
           });
     }
     else {
@@ -113,14 +115,13 @@ document.getElementById("goButton").addEventListener("click", (event)=>{
                 }, 1000);
             }
             else if (!isValidEmail(document.getElementById("new_username").value)) {
-                document.getElementById("title").innerHTML = "invaid email.";
+                document.getElementById("title").innerHTML = "invalid email.";
                 document.getElementById("new_username").previousElementSibling.classList.add("leftEmpty");
                 setTimeout(()=>{
                     document.getElementById("new_username").previousElementSibling.classList.remove("leftEmpty");
                 }, 1000);
             }
             else {
-
                 axios.post('/signup-data-portal', {
                     new_username_input: document.getElementById("new_username").value,
                     new_password_input: document.getElementById("new_password").value,
@@ -130,16 +131,15 @@ document.getElementById("goButton").addEventListener("click", (event)=>{
                       console.log(response);
                       if (response.data.code === "USERNAME TAKEN") {
                         document.getElementById("title").innerHTML = "an account with this username exists.";
+                        document.getElementById("new_username").previousElementSibling.classList.add("leftEmpty");
+                        setTimeout(()=>{
+                            document.getElementById("new_username").previousElementSibling.classList.remove("leftEmpty");
+                        }, 1000);
                       }
                       else if (response.data.code === "USERNAME FREE, PROCEDE") {
-                        document.getElementById("title").innerHTML = "please validate your email.";
+                        document.getElementById("title").innerHTML = "please verify your email.";
                       }
                 });
-    
-
-
-
-
             }
         }
         
@@ -165,7 +165,7 @@ let shakeLogIn = (str) =>{
         document.getElementById("title").innerHTML = "We don't recognize this username/password combination.<br>Try signing up?";
     }
     else {
-        document.getElementById("title").innerHTML = "Please verify email.";
+        document.getElementById("title").innerHTML = "please verify email.";
     }
     
     document.getElementById("loginFields").classList.add("shakeLogIn");
@@ -174,7 +174,7 @@ let shakeLogIn = (str) =>{
         document.getElementById("loginFields").classList.remove("shakeLogIn");
     },250);
     setTimeout(()=>{
-        document.getElementById("title").innerHTML = "login."
+        document.getElementById("title").innerHTML = "log in."
     },4000);
 }
 

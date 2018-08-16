@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css?family=Comfortaa');
+
+body {
+    background: linear-gradient(to left, #396afc, #2948ff);
+    background-size: 400% 400%;
+
+    margin: 0 auto;
+
+    animation: gradientShift 3s ease 0s infinite;
+}
+@keyframes gradientShift {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+}
+section {
+    margin: 0 auto;
+
+    height: 300px;
+    width: 800px;
+
+    background-color: rgba(red, .8);
+
+    border-radius: 15px;
+
+
+    position: absolute;
+    top: 25%;
+    left: 0;
+    right: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: space-evenly;
+    justify-content: center;
+}
+
+h1, h2 {
+    font-family: "Comfortaa";
+    color: white;
+
+    position: relative;
+    left: 20px;
+}
+span {
+    color: blue;
+}

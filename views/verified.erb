@@ -1,0 +1,31 @@
+<head>
+    <meta charset="UTF-8">
+    <title>verified</title>
+    <link rel="stylesheet" href="<%= url('style-verified.css')%>">
+</head>
+<body>
+
+<section>
+
+    <h1>Congrats!</h1>
+    <h2>The account for <%=@username%> has been verified.</h2>
+    <h2>You can now <span id = "logInRoute">log in</span> with your credentials.</h2>
+</section>
+
+
+
+
+
+
+
+    <!-- particles.js container --> 
+    <div id="particles-js"></div> 
+    <!-- particles.js lib - https://github.com/VincentGarreau/particles.js -->
+    <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type = "text/javascript" src="<%= url('script-verified.js') %>"></script>
+    <style>
+        .count-particles{display: none !important;}
+    </style>
+</body>
+

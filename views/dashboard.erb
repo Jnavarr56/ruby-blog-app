@@ -1,0 +1,79 @@
+
+<head>
+    <meta charset="UTF-8">
+    <title>dashboard</title>
+    <link rel="stylesheet" href="<%= url('style-dashboard.css')%>">
+</head>
+<body>
+    <nav>
+        <h1 id = "leftHandNavHeading">dashboard</h1>
+        <div id = "rightHandNavHeading">
+            <h3 class = "rightNavItem">feed</h3>
+            <h3 class = "rightNavItem">friends</h3>
+            <h3 id = "logOut" class = "rightNavItem">log out</h3>
+        </div>
+    </nav>
+
+
+    <div id = "personalStatsBox">
+        <div class = "personalStatsBoxRow"><h5>Username: <%=@current_user_account[:email]%></h5></div>
+        <div class = "personalStatsBoxRow"><h5>First Name: <%=@current_user_account[:first_name]%></h5></div>
+        <div class = "personalStatsBoxRow"><h5>Last Name: <%=@current_user_account[:last_name]%></h5></div>
+        <div class = "personalStatsBoxRow"><h5 id = "createdDate"><%=@current_user_account[:created_at]%></h5></div>
+        <div class = "personalStatsBoxRow"><h5 id = "lastActive"><%=@current_user_account[:updated_at]%></h5></div>
+        <div class = "personalStatsBoxRow"><button id = "editAccountInfoButton">Edit Account Information</button></div>
+    </div>
+
+
+    <form id = "accountChangeForm">
+        <div id = "accountChangeModal">
+            <h6 id = "closeAccountChangeModalButton">[X]</h6>
+            <h1>CHANGE ACCOUNT INFO</h1>
+            <h3 id = "accountChangeModalInstructions">
+                These changes cannot be undone.<br><br>
+                You will need to verify these changes via email and before they are implemented.<br><br>
+                You will be logged out.
+            </h3>
+            <div id = "accountChangeFormInputs">
+                <div class = "accountChangeFormInputsRow">
+                    <h4>New Username:<h4>
+                    <input type = "text" disabled = "true" placeholder = "DO NOT CHANGE">
+                    <input class = "accountChangeCheckBox" type = "checkbox">
+                </div>
+                <div class = "accountChangeFormInputsRow">
+                    <h4>New First Name:<h4>
+                    <input type = "text" disabled = "true" placeholder = "DO NOT CHANGE">
+                    <input class = "accountChangeCheckBox" type = "checkbox">
+                </div>
+                <div class = "accountChangeFormInputsRow">
+                    <h4>New Last Name:<h4>
+                    <input type = "text" disabled = "true" placeholder = "DO NOT CHANGE">
+                    <input class = "accountChangeCheckBox" type = "checkbox">
+                </div>
+                <div class = "accountChangeFormInputsRow">
+                    <h4>New Password:<h4>
+                    <input type = "text" disabled = "true" placeholder = "DO NOT CHANGE">
+                    <input class = "accountChangeCheckBox" type = "checkbox">
+                </div>
+                <div class = "accountChangeFormInputsRow">
+                    <h4>Current Password:<h4>
+                    <input type = "text" placeholder = "REQUIRED">
+                </div>
+            </div>
+            <div id = "accountChangeFormButtonWrapper">
+                <button id = "accountChangeFormButton">Apply Changes</button>
+            </div>
+        </div>
+    </form>
+
+<!-- particles.js container --> 
+<div id="particles-js"></div> 
+<!-- particles.js lib - https://github.com/VincentGarreau/particles.js -->
+<script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type = "text/javascript" src="<%= url('script-dashboard.js') %>"></script>
+<style>
+    .count-particles{display: none !important;}
+</style>
+
+</body>

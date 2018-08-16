@@ -2,7 +2,7 @@
 body {
   background: linear-gradient(to left, #396afc, #2948ff);
   background-size: 400% 400%;
-  animation: gradientShift 3s ease 0s infinite; }
+  animation: gradientShift 6s ease 0s infinite; }
 
 @keyframes gradientShift {
   0% {

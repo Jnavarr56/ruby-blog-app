@@ -3,7 +3,7 @@
 body {
     background: linear-gradient(to left, #396afc, #2948ff);
     background-size: 400% 400%;
-    animation: gradientShift 3s ease 0s infinite;
+    animation: gradientShift 6s ease 0s infinite;
 }
 @keyframes gradientShift {
     0% {background-position: 0% 50%;}
@@ -20,21 +20,15 @@ nav {
     position: fixed;
     top: 0;
     right: 100px;
-
     height: 50px;
     width: 100px;
-
     background-color: rgba(red, .8);
-
     border-radius: 0 0 15px 15px;
-
     @include centerAll(row, center, center);
-
     img {
         height: 40px;
         width: 40px;
     }
-
 }
 form {
     height: 400px;
@@ -142,8 +136,6 @@ form {
     height: 50%;
     width: 100%;
     @include centerAll(row,space-evenly,center);
-
-
 }
 .signupFieldsRow:nth-child(2) {
     padding-left: 35px;

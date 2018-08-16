@@ -3,5 +3,5 @@ class Post < ActiveRecord::Base
     has_many :interact_joins
     has_many :interacts, through: :interact_joins
     has_many :hashtag_joins
-    has_many :hashtags, through: :hash_joins
+    has_many :hashtags, through: :hashtag_joins
 end

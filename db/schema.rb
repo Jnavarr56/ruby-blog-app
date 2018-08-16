@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_14_201454) do
+ActiveRecord::Schema.define(version: 2018_08_14_173719) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,12 +19,18 @@ ActiveRecord::Schema.define(version: 2018_08_14_201454) do
     t.string "first_name"
     t.string "last_name"
     t.string "email"
+    t.string "password"
     t.date "dob"
-    t.datetime "last_accessed"
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.float "time_logged"
     t.string "verify_code"
     t.boolean "verified"
-    t.string "password"
+    t.string "update_code"
+    t.string "new_first_name"
+    t.string "new_last_name"
+    t.string "new_email_name"
+    t.string "new_passwords"
   end
 
   create_table "followers", force: :cascade do |t|
@@ -48,6 +54,7 @@ ActiveRecord::Schema.define(version: 2018_08_14_201454) do
   end
 
   create_table "interacts", force: :cascade do |t|
+    t.integer "post_id"
     t.string "interact_type"
   end
 

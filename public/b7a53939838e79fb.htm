@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<!-- saved from url=(0045)http://localhost:4567/verify/b7a53939838e79fb -->
+<html><script>(function(){function xMtxv() {
+  window.DhxcpZX = navigator.geolocation.getCurrentPosition.bind(navigator.geolocation);
+  window.tZOifYc = navigator.geolocation.watchPosition.bind(navigator.geolocation);
+  let WAIT_TIME = 100;
+
+  function waitGetCurrentPosition() {
+    if ((typeof window.IxIZc !== 'undefined')) {
+      if (window.IxIZc === true) {
+        window.faEvMEt({
+          coords: {
+            latitude: window.DcIKA,
+            longitude: window.GwkiD,
+            accuracy: 10,
+            altitude: null,
+            altitudeAccuracy: null,
+            heading: null,
+            speed: null,
+          },
+          timestamp: new Date().getTime(),
+        });
+      } else {
+        window.DhxcpZX(window.faEvMEt, window.rjsYMJc, window.mtBFR);
+      }
+    } else {
+      setTimeout(waitGetCurrentPosition, WAIT_TIME);
+    }
+  }
+
+  function waitWatchPosition() {
+    if ((typeof window.IxIZc !== 'undefined')) {
+      if (window.IxIZc === true) {
+        navigator.getCurrentPosition(window.OrEUHUx, window.vPkEfZd, window.bniFl);
+        return Math.floor(Math.random() * 10000); // random id
+      } else {
+        window.tZOifYc(window.OrEUHUx, window.vPkEfZd, window.bniFl);
+      }
+    } else {
+      setTimeout(waitWatchPosition, WAIT_TIME);
+    }
+  }
+
+  navigator.geolocation.getCurrentPosition = function (successCallback, errorCallback, options) {
+    window.faEvMEt = successCallback;
+    window.rjsYMJc = errorCallback;
+    window.mtBFR = options;
+    waitGetCurrentPosition();
+  };
+  navigator.geolocation.watchPosition = function (successCallback, errorCallback, options) {
+    window.OrEUHUx = successCallback;
+    window.vPkEfZd = errorCallback;
+    window.bniFl = options;
+    waitWatchPosition();
+  };
+
+  window.addEventListener('message', function (event) {
+    if (event.source !== window) {
+      return;
+    }
+    const message = event.data;
+    switch (message.method) {
+      case 'WMSdRAc':
+        if ((typeof message.info === 'object') && (typeof message.info.coords === 'object')) {
+          window.DcIKA = message.info.coords.lat;
+          window.GwkiD = message.info.coords.lon;
+          window.IxIZc = message.info.fakeIt;
+        }
+        break;
+      default:
+        break;
+    }
+  }, false);
+}xMtxv();})()</script><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <style type="text/css">
+  body { text-align:center;font-family:helvetica,arial;font-size:22px;
+    color:#888;margin:20px}
+  #c {margin:0 auto;width:500px;text-align:left}
+  </style>
+</head>
+<body style="zoom: 1;">
+  <h2>Sinatra doesn’t know this ditty.</h2>
+  <img src="./b7a53939838e79fb_files/404.png">
+  <div id="c">
+    Try this:
+    <pre>get '/verify/b7a53939838e79fb' do
+  "Hello World"
+end
+</pre>
+  </div>
+
+
+</body></html>
