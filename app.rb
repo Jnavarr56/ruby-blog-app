@@ -14,7 +14,7 @@ require 'pony'
 
 
 enable :sessions
-set :database, {adapter: "postgresql", database: "ruby_blog_database"}
+#set :database, {adapter: "postgresql", database: "ruby_blog_database"}
 
 get "/" do
     if session[:current_user_id] ===  nil
