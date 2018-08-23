@@ -24,6 +24,10 @@
         <div class = "personalStatsBoxRow"><button id = "editAccountInfoButton">Edit Account Information</button></div>
     </div>
 
+    <div id = "newPostButtonBox">
+        <button id = "newPostStartButton">New Post</button>
+    </div>
+
 
     <form id = "accountChangeForm">
         <div id = "accountChangeModal">
@@ -31,40 +35,94 @@
             <h1>CHANGE ACCOUNT INFO</h1>
             <h3 id = "accountChangeModalInstructions">
                 These changes cannot be undone.<br><br>
-                You will need to verify these changes via email and before they are implemented.<br><br>
-                You will be logged out.
+                You will need to verify these changes via email before they are implemented.<br><br>
+                You will be logged out.<br><br>
+                Check the box to change the value.
             </h3>
             <div id = "accountChangeFormInputs">
                 <div class = "accountChangeFormInputsRow">
                     <h4>New Username:<h4>
-                    <input type = "text" disabled = "true" placeholder = "DO NOT CHANGE">
+                    <input id = "newUsernameInput" class = "newFieldInput" type = "text" disabled = "true" placeholder = "DO NOT CHANGE">
                     <input class = "accountChangeCheckBox" type = "checkbox">
                 </div>
                 <div class = "accountChangeFormInputsRow">
                     <h4>New First Name:<h4>
-                    <input type = "text" disabled = "true" placeholder = "DO NOT CHANGE">
+                    <input id = "newFirstNameInput" class = "newFieldInput" type = "text" disabled = "true" placeholder = "DO NOT CHANGE">
                     <input class = "accountChangeCheckBox" type = "checkbox">
                 </div>
                 <div class = "accountChangeFormInputsRow">
                     <h4>New Last Name:<h4>
-                    <input type = "text" disabled = "true" placeholder = "DO NOT CHANGE">
+                    <input id = "newLastNameInput" class = "newFieldInput" type = "text" disabled = "true" placeholder = "DO NOT CHANGE">
                     <input class = "accountChangeCheckBox" type = "checkbox">
                 </div>
                 <div class = "accountChangeFormInputsRow">
                     <h4>New Password:<h4>
-                    <input type = "text" disabled = "true" placeholder = "DO NOT CHANGE">
+                    <input id = "newPasswordInput" class = "newFieldInput" type = "text" disabled = "true" placeholder = "DO NOT CHANGE">
                     <input class = "accountChangeCheckBox" type = "checkbox">
                 </div>
                 <div class = "accountChangeFormInputsRow">
                     <h4>Current Password:<h4>
-                    <input type = "text" placeholder = "REQUIRED">
+                    <input type = "password" id = "passwordInput" class = "newFieldInput" type = "text" placeholder = "REQUIRED">
                 </div>
             </div>
             <div id = "accountChangeFormButtonWrapper">
                 <button id = "accountChangeFormButton">Apply Changes</button>
+                <button id = "accountDeleteFormButton">Delete Account</button>
             </div>
         </div>
     </form>
+
+    <section id = "postMasterWrapper">
+        <div id = "postSectionHeader">
+            <h1 id = "postCount">Posts [<%=@user_posts.size%>]</h1>
+            <div id = "filterMenuWrapper">
+                <p>Filter By:</p>
+                <div id = "filterTagsWrapper">
+                    <% @hashtagsTable.each do |hashtag_record| %>
+                        <div class = "hashOptionsWrapper">
+                            <p><%= hashtag_record[:hashtag] %></p>
+                            <input value = <%= hashtag_record[:id].to_s %> type = "checkbox">
+                        </div>
+                    <%end%>
+                </div>
+                <button id = "filterButtonGo">Go</button>
+            </div>
+        </div>
+        <div id = "newPostEditorWrapper">
+            <div class = "editorRow" id = "newPostEditorTitleRow">
+                <h1 class = "editorCaption">Title:</h1><input id = "newPostTitleInput" class = "editorInput">
+            </div>
+            <div class = "editorRow" id = "newPostEditorContentRow">
+                <h1 class = "editorCaption">Content:</h1>
+                <textarea id = "newPostContentInput" class = "editorInput"></textarea>
+            </div>
+            <div class = "editorRow" id = "newPostEditorButtonsRow">
+                <button id = "submitNewPostButton">Submit</button>
+            </div>
+            <div class = "editorRow" id = "newPostEditorTagsRow">
+                <h3 class = "editorCaption">Add Tags:</h3>
+                <div id = "editorTagsWrapper">
+                    <% @hashtagsTable.each do |hashtag_record| %>
+                        <div class = "editorTagsOption">
+                            <p><%= hashtag_record[:hashtag] %></p>
+                            <input class = "newPostTags" value = <%= hashtag_record[:id].to_s %> type = "checkbox">
+                        </div>
+                    <%end%>
+                </div>
+            </div>
+        </div>
+        <% if @user_posts.size > 0 %>
+            <% @user_posts.each do |post| %>
+                <div class = "postWrapper">
+                    <h1><%=post[:post_title]%></h1>
+                    <textarea disabled><%=post[:content]%></textarea>
+                    <button id = <%= post[:id]  %> class = "deletePostButton">Delete Post</button>
+                    <p>Created on: <%=post[:created_at]%></p>
+                    <p>Tags: </p>
+                </div>
+            <% end %>
+        <% end %>
+    </section>
 
 <!-- particles.js container --> 
 <div id="particles-js"></div> 

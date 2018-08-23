@@ -49,20 +49,21 @@ ActiveRecord::Schema.define(version: 2018_08_14_173719) do
 
   create_table "interact_joins", force: :cascade do |t|
     t.integer "post_id"
-    t.integer "post_type_id"
+    t.integer "interact_id"
     t.integer "interacting_user_id"
   end
 
   create_table "interacts", force: :cascade do |t|
-    t.integer "post_id"
     t.string "interact_type"
   end
 
   create_table "posts", force: :cascade do |t|
     t.integer "user_id"
     t.datetime "date_posted"
+    t.string "post_title"
     t.string "content"
-    t.string "type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

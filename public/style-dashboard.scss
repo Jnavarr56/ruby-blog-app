@@ -6,14 +6,21 @@ input:focus, button:focus {
     outline-style: none;
 }
 body {
+    opacity: 0;
+
+
     background: linear-gradient(to left, #396afc, #2948ff);
     background-size: 400% 400%;
     animation: gradientShift 6s ease 0s infinite;
 
     margin: 0 auto;
 
+    height: auto;
+
     position: relative;
     nav {
+        z-index: 1000;
+
         position: fixed;
         top: 0%;
 
@@ -96,7 +103,10 @@ body {
                 font-family: "Comfortaa";
 
                 border-radius: 15px;
-                border-style: none;
+                border-style: solid;
+                border-color: black;
+
+
             }
             #editAccountInfoButton:hover {
                 color: white;
@@ -112,13 +122,52 @@ body {
             background-color: #e5e5e5;
         }
     }
+    #newPostButtonBox {
+        position: fixed;
+        top: 525px;
+        left: 60px;
+
+
+        height: 100px;
+        width: 300px;
+
+        border-radius: 15px;
+        border-style: solid;
+        border-color: rgba(163,163,163, .5);
+
+
+        background-color: white;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+    }
+    #newPostButtonBox:hover {
+        background-color: #e5e5e5;
+    }
+    #newPostStartButton {
+        height: 40%;
+        width: 80%;
+
+        font-family: "Comfortaa";
+
+        border-radius: 15px;
+        border-style: solid;
+        border-color: black;
+    }
+    #newPostStartButton:hover {
+        color: white;
+
+        background-color: red;
+    }
 }
 @keyframes gradientShift {
     0% {background-position: 0% 50%;}
     50% {background-position: 100% 50%;}
     100% {background-position: 0% 50%;}
 }
-h1, h3, h5 {
+h1, h3, h4, h5 {
     font-family: "Comfortaa";
 }
 #accountChangeForm {
@@ -127,7 +176,6 @@ h1, h3, h5 {
 
     background-color: rgba(black, .7);
 
-    
 
     margin: 0 auto;
 
@@ -149,7 +197,7 @@ h1, h3, h5 {
         border-radius: 15px;
 
         position: relative;
-        top: -100px;
+        top: -50px;
 
         margin: 0 auto;
 
@@ -194,8 +242,6 @@ h1, h3, h5 {
             justify-content: center;
             align-items: space-evenly;
 
-            
-
             .accountChangeFormInputsRow {
                 height: 20%;
                 width: 100%;
@@ -211,8 +257,9 @@ h1, h3, h5 {
                     
                     text-indent: 10px;
                 }
-                
- 
+            }
+            .accountChangeFormInputsRow:last-child {
+                background-color: rgba(blue,.5);
             }
         }
 
@@ -223,29 +270,377 @@ h1, h3, h5 {
             position: relative;
 
             display: flex;
-            justify-content: center;
+            justify-content: space-evenly;
             align-items: center;
-        }
 
-        #accountChangeFormButton {
-            height: 30%;
-            width: 20%;
+            #accountChangeFormButton {
+                height: 30%;
+                width: 20%;
+    
+                border-radius: 15px;
+                border-style: none;
+    
+                color: white;
+                font-family: "Comfortaa";
+                font-size: 75%;
+    
+                background-color: red;
+            }
 
-            border-radius: 15px;
-            border-style: none;
+            #accountChangeFormButton:hover {
+                height: 35%;
+                width: 25%;
+    
+                font-size: 85%;
+            }
 
-            color: white;
-            font-family: "Comfortaa";
-            font-size: 75%;
+            #accountDeleteFormButton {
+                height: 30%;
+                width: 20%;
+    
+                border-radius: 15px;
+                border-style: none;
+    
+                color: white;
+                font-family: "Comfortaa";
+                font-size: 75%;
+    
+                background-color: red;
+            }
 
-            background-color: red;
-        }
-
-        #accountChangeFormButton:hover {
-            height: 35%;
-            width: 25%;
-
-            font-size: 85%;
+            #accountDeleteFormButton:hover {
+                height: 35%;
+                width: 25%;
+    
+                font-size: 85%;
+            }
         }
     }
+}
+
+#postMasterWrapper {
+    position: absolute;
+    top: 100px;
+    right: 50px;
+
+    height: auto;
+    width: 900px;
+
+    border-style:solid;
+    border-color: black;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    border-radius: 15px;
+
+    overflow: hidden;
+    
+    
+
+    #postSectionHeader {
+        height: 100px; 
+        width: 100%;
+
+        background-color: white;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        position: relative;
+
+        #postCount {
+            position: relative;
+            left: 120px;
+        }
+
+        //border-radius: 10px;
+      
+        #filterMenuWrapper {
+            height: 100%;
+            width: 60%;
+
+            
+
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            p {
+                font-family: "Comfortaa";
+            }
+            #filterTagsWrapper {
+                height: 100%;
+                width: 50%;
+
+                
+
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+
+                
+
+                background-color: rgba(darkblue, .5);
+
+                position: relative;
+
+                overflow-y: scroll;
+
+
+                .hashOptionsWrapper {
+                    height: 20%;
+                    width: 80%;
+
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    padding: 17px;
+
+                    position: relative;
+                    
+                }
+                .hashOptionsWrapper:hover {
+                    background-color: rgba(darkblue, .8);
+                    border-style: solid;
+                    color: white;
+                    border-color: white;
+                }
+
+
+            }
+            #filterButtonGo {
+                border-style: solid;
+                border-color: black;
+                border-radius: 15px;
+
+                background-color: white;
+
+                font-family: "Comfortaa";
+            }
+        }
+    }
+    #newPostEditorWrapper {
+        height: 0px;
+        width: 100%;
+
+        background-color: darkblue;
+
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        .editorRow {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;  
+
+            overflow: scroll;
+        }
+        #newPostEditorTitleRow {
+            height: 15%;
+            width: 100%;
+
+            border-style: solid;
+
+            justify-content: space-around;
+
+            input {
+                border-radius: 15px;
+                border-style: none;
+
+                height: 40%;
+                width: 50%;
+
+                font-family: "Comfortaa";
+                font-size: 20px;
+
+                text-indent: 10px;
+
+            }
+        }
+        #newPostEditorContentRow {
+            height: 60%;
+            width: 100%;
+
+            flex-direction: column;
+
+            border-style: solid;
+
+            textarea {
+                height: 80%;
+                width: 100%;
+
+                font-family: "Comfortaa";
+                font-size: 15px;                
+            }
+            textArea:focus {
+                outline-style: none;
+            }
+        }
+        #newPostEditorButtonsRow {
+            height: 10%;
+            width: 100%;
+
+            
+            border-style: solid;
+            #submitNewPostButton {
+                height: 60%;
+                width: 15%;
+
+                background-color: #044f67;
+
+                border-style: none;
+                
+                color: white;
+                font-family: "Comfortaa";
+
+                border-radius: 15px;
+            }
+        }
+        #newPostEditorTagsRow {
+            height: 15%;
+            width: 100%;
+
+            
+            border-style: solid;
+
+            #editorTagsWrapper {
+                height: 100%;
+                width: 30%;
+
+                border-radius: solid;
+
+                background-color: rgba(red, .5);
+
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+
+                overflow-y: scroll;
+
+                .editorTagsOption {
+                    height: 20%;
+                    width: 80%;
+
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    padding: 16px;
+
+                    font-family: "Comfortaa";
+                    color: white;
+                }
+                .editorTagsOption:hover {
+                    border-style: solid;
+                    border-color: white;
+
+                    background-color: rgba(red, .8);
+
+                }
+
+            }
+
+        }
+    }
+
+    .postWrapper {
+        height: 300px;
+        width: 100%;
+
+        background-color: #34526f;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+
+    
+        h1 {
+            color: white;
+        }
+        p {
+            color: white;
+            font-family: "Comfortaa";
+        }
+        textarea {
+            font-family: "Comfortaa";
+            font-size: 15px;
+
+            height: auto;
+            width: 100%;   
+        }
+        button {
+            background-color: red;
+            color: white;
+            font-family: "Comfortaa";
+            border-style: none;
+
+            height: 10%;
+            width: 10%;
+            
+            border-radius: 15px;
+        }
+    }
+}
+
+
+.editorCaption {
+    color: white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#filterTagsWrapper::-webkit-scrollbar {
+    background-color: rgba(black, .5);
+    height: 0px;
+    width: 7px;
+}
+#filterTagsWrapper::-webkit-scrollbar-thumb {
+    background-color: rgba(black, .8);
+}
+
+#editorTagsWrapper::-webkit-scrollbar {
+    background-color: rgba(black, .5);
+    height: 0px;
+    width: 7px;
+}
+#editorTagsWrapper::-webkit-scrollbar-thumb {
+    background-color: rgba(black, .8);
+}
+
+.expandPostEditor {
+    animation: expandPostEditorAnim .5s ease 0s 1 forwards;
+}
+@keyframes expandPostEditorAnim {
+    0% {height: 0px;}
+    100% {height: 500px;}
+}
+.collapsePostEditor {
+    animation: collapsePostEditorAnim .5s ease 0s 1 forwards;
+}
+@keyframes collapsePostEditorAnim {
+    0% {height: 500px;}
+    100% {height: 0px;}
 }

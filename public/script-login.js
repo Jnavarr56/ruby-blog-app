@@ -1,3 +1,14 @@
+document.addEventListener("DOMContentLoaded", ()=> {
+    let op = 0;
+    let fadeIn = setInterval(()=>{
+        op += .025;
+        document.body.style.opacity = `${op}`;
+        if (op === 1) {
+            clearInterval(fadeIn);
+        }
+    },10);
+});
+
 //FOCUS ON INPUT UPON LOADING-----------------------------------------------------------------------------------
 window.onload = ()=> {
     document.getElementsByTagName("input")[0].focus();
