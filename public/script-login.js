@@ -84,6 +84,7 @@ document.getElementById("togglePassword").addEventListener("change", ()=>{
 //ATTEMPT A LOGIN WITH A POST REQUEST OR ATTEMPT A SIGN UP WITH A POST REQUEST---------------------------------
 document.getElementById("goButton").addEventListener("click", (event)=>{
     event.preventDefault();
+    console.log("hi");
     if (document.getElementById("goButton").innerHTML === "go") { //<---try log in and return shake animation if no match
         axios.post('/login-data-portal', {
             usernameInput: document.getElementById("username_input").value,
