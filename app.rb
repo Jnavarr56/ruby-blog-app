@@ -395,6 +395,7 @@ post "/posts-portal" do
     if user_input[:command] === "CREATE"
         if user_input[:user_added_tags] === nil
             Post.create(user_id: session[:current_user_id], post_title: user_input[:post_title], content: user_input[:post_content])
+            #ADD HASHTAG JOIN
             $posting_return_message = {:code => "POST ADDED"}
         else
             Post.create(user_id: session[:current_user_id], post_title: user_input[:post_title], content: user_input[:post_content])

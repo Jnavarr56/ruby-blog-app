@@ -105,7 +105,7 @@
                     <% @hashtagsTable.each do |hashtag_record| %>
                         <div class = "editorTagsOption">
                             <p><%= hashtag_record[:hashtag] %></p>
-                            <input class = "newPostTags" value = <%= hashtag_record[:id].to_s %> type = "checkbox">
+                            <input id = "postTagAdder" class = "newPostTags" value = <%= hashtag_record[:id].to_s %> type = "checkbox">
                         </div>
                     <%end%>
                 </div>
@@ -118,7 +118,7 @@
                     <textarea disabled><%=post[:content]%></textarea>
                     <button id = <%= post[:id]  %> class = "deletePostButton">Delete Post</button>
                     <p>Created on: <%=post[:created_at]%></p>
-                    <p>Tags: </p>
+                    <p id = "tagHolder">Tags: </p>
                 </div>
             <% end %>
         <% end %>
