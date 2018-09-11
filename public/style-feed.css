@@ -145,6 +145,7 @@ h1, h3, h4, h5 {
     color: white;
     margin: 0; }
   #followedPosts li {
-    margin: 15px; }
+    margin: 15px;
+    color: white; }
 
 /*# sourceMappingURL=style-feed.css.map */

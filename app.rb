@@ -511,5 +511,41 @@ post "/follow" do
         end 
         
     end
+end
 
+post "/friends" do
+    if session[:current_user_id] ===  nil
+        redirect "/"
+    else
+        user_input = eval(request.body.read)
+        puts user_input
+
+        if user_input[:command] === "FOLLOW"
+            Follower.create(following_user_id: session[:current_user_id], followed_user_id: user_input[:user_to_follow])
+        else
+            Follower.find_by(following_user_id: session[:current_user_id], followed_user_id: user_input[:user_to_unfollow]).destroy
+        end 
+        
+    end
+end
+
+get "/friends" do
+    if session[:current_user_id] ===  nil
+        redirect "/"
+    else
+
+        @following = []
+        Follower.where("following_user_id = ?", session[:current_user_id]).each do |follow_someone|
+            @following.push(Account.find(follow_someone.followed_user_id))
+        end
+
+        @followed_by = []
+        Follower.where("followed_user_id = ?", session[:current_user_id]).each do |follow_me|
+            @followed_by.push(Account.find(follow_me.following_user_id))   
+        end
+
+
+        erb :follow
+
+    end
 end

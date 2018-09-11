@@ -1,0 +1,18 @@
+<ul>
+    <h1>Followers</h1>
+    <% @followed_by.each do |followed_by| %>
+        <li>
+            <a href = "/users/<%= followed_by.id %>"><h4><%= followed_by.email %></h4></a>
+        </li>
+    <% end %>
+</ul>
+
+
+<ul>
+    <h1>Following</h1>
+    <% @following.each do |follow_me| %>
+        <li>
+            <a href = "/users/<%= follow_me.id %>"><h4><%= follow_me.email %></h4></a>
+        </li>
+    <% end %>
+</ul>
