@@ -117,6 +117,8 @@ body {
     background-position: 0% 50%; } }
 h1, h3, h4, h5 {
   font-family: "Comfortaa"; }
+  h1 a, h3 a, h4 a, h5 a {
+    text-decoration: none; }
 
 #accountChangeForm {
   height: 100%;
@@ -357,7 +359,8 @@ h1, h3, h4, h5 {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    align-items: center; }
+    align-items: center;
+    border-top-style: solid; }
     #postMasterWrapper .postWrapper h1 {
       color: white; }
     #postMasterWrapper .postWrapper p {
@@ -366,10 +369,18 @@ h1, h3, h4, h5 {
     #postMasterWrapper .postWrapper textarea {
       font-family: "Comfortaa";
       font-size: 15px;
-      height: auto;
+      height: 50%;
       width: 100%; }
-    #postMasterWrapper .postWrapper button {
+    #postMasterWrapper .postWrapper .deletePostButton {
       background-color: red;
+      color: white;
+      font-family: "Comfortaa";
+      border-style: none;
+      height: 10%;
+      width: 10%;
+      border-radius: 15px; }
+    #postMasterWrapper .postWrapper .updatePostButton {
+      background-color: orange;
       color: white;
       font-family: "Comfortaa";
       border-style: none;
@@ -379,6 +390,27 @@ h1, h3, h4, h5 {
 
 .editorCaption {
   color: white; }
+
+#userPosts {
+  position: absolute;
+  top: 100px;
+  left: 500px;
+  height: 600px;
+  width: 800px;
+  border-radius: 15px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: white;
+  overflow-y: scroll; }
+  #userPosts h1, #userPosts h3, #userPosts h4 {
+    color: white; }
+
+#userPosts::-webkit-scrollbar {
+  background-color: rgba(255, 255, 255, 0.5);
+  width: 7px; }
+
+#userPosts::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.8); }
 
 #filterTagsWrapper::-webkit-scrollbar {
   background-color: rgba(0, 0, 0, 0.5);

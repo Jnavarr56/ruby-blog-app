@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css?family=Comfortaa');
+button:hover {
+    cursor: pointer;
+}
+input:focus, button:focus {
+    outline-style: none;
+}
+
+body {
+    opacity: 0;
+
+    background: linear-gradient(to left, #396afc, #2948ff);
+    background-size: 400% 400%;
+    animation: gradientShift 6s ease 0s infinite;
+
+    margin: 0 auto;
+
+    height: auto;
+    width: 100%;    
+    nav {
+        z-index: 1000;
+
+        position: fixed;
+        top: 0%;
+
+        margin: 0 auto;
+
+        height: 50px;
+        width: 100%;
+
+        background: white;
+
+        border-style: none none solid none;
+        border-color: rgba(163,163,163, .5);
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        #rightHandNavHeading {
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+
+            height: 100%;
+            width: 350px;
+        }
+        #leftHandNavHeading {
+            position: relative;
+            left: 15px;
+        }
+        .rightNavItem {
+            padding: 10px;
+        }
+        .rightNavItem:hover {
+            background: rgba(red, .8);
+            border-radius: 15px;
+            color: white;
+            cursor: pointer;
+        }
+    }
+    textarea {
+        margin: 0 auto;
+
+        position: absolute;
+        top: 100px;
+        left: 0;
+        right: 0;
+
+        height: 600px;
+        width: 950px;
+
+        border-radius: 15px;
+        border-width: 5px;
+
+        padding: 10px;
+
+        font-family: "Comfortaa";
+        font-size: 15px;    
+        color: white;
+
+        background-color: rgba(255,255,255, 0);
+        
+        overflow-y: scroll;
+    }
+    textarea::-webkit-scrollbar {
+        background-color: rgba(255,255,255, .4);
+
+        height: 90%;
+        width: 7px;
+
+        position: absolute;
+        right: 10px;
+    }
+    textarea::-webkit-scrollbar-thumb {
+        background-color: rgba(0,0,0,.3);
+        -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+    }
+    #author {
+        margin: 0 auto;
+
+        position: absolute;
+        
+        left: 30%;
+        right: 0;
+        bottom: 150px;
+
+        font-family: "Comfortaa";
+        color: white;
+    }
+    #tags {
+        margin: 0 auto;
+
+        position: absolute;
+        
+        left: 60%;
+        right: 0;
+        bottom: 150px;
+
+        font-family: "Comfortaa";
+        color: white;
+    }
+}
+@keyframes gradientShift {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+}
+
+h1, h3, h4, h5 {
+    font-family: "Comfortaa";
+
+    a {
+        text-decoration: none;
+        color: "black";
+    }
+}

@@ -1,0 +1,35 @@
+<head>
+    <meta charset="UTF-8">
+    <title>dashboard</title>
+    <link rel="stylesheet" href="<%= url('style-post.css')%>">
+</head>
+
+<body>
+    <nav>
+        <h1 id = "leftHandNavHeading"><%= @current_post.post_title %></h1>
+        <div id = "rightHandNavHeading">
+            <a href = "/dashboard"><h3 class = "rightNavItem">dashboard</h3></a>
+            <a href = "/feed"><h3 class = "rightNavItem">feed</h3></a>
+            <h3 id = "logOut" class = "rightNavItem">log out</h3>
+        </div>
+    </nav>
+
+
+    <textarea disabled><%= @current_post.content %></textarea>
+
+    <a href = "/users/<%= @author.id %>"><h2 id = "author"><%= @author.email %></h2></a>
+
+    <h2 id = "tags"><%= @tags.join(", ") %></h2>
+
+<!-- particles.js container --> 
+    <div id="particles-js"></div> 
+<!-- particles.js lib - https://github.com/VincentGarreau/particles.js -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script type = "text/javascript" src="<%= url('script-post.js') %>"></script>
+<style>
+    .count-particles{display: none !important;}
+</style>
+
+</body>

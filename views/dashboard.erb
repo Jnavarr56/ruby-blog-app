@@ -8,8 +8,8 @@
     <nav>
         <h1 id = "leftHandNavHeading">dashboard</h1>
         <div id = "rightHandNavHeading">
-            <h3 class = "rightNavItem">feed</h3>
-            <h3 class = "rightNavItem">friends</h3>
+            <a href = "/feed"><h3 class = "rightNavItem">feed</h3></a>
+            <a href = ""><h3 class = "rightNavItem">followers</h3></a>
             <h3 id = "logOut" class = "rightNavItem">log out</h3>
         </div>
     </nav>
@@ -19,8 +19,8 @@
         <div class = "personalStatsBoxRow"><h5>Username: <%=@current_user_account[:email]%></h5></div>
         <div class = "personalStatsBoxRow"><h5>First Name: <%=@current_user_account[:first_name]%></h5></div>
         <div class = "personalStatsBoxRow"><h5>Last Name: <%=@current_user_account[:last_name]%></h5></div>
-        <div class = "personalStatsBoxRow"><h5 id = "createdDate"><%=@current_user_account[:created_at]%></h5></div>
-        <div class = "personalStatsBoxRow"><h5 id = "lastActive"><%=@current_user_account[:updated_at]%></h5></div>
+        <div class = "personalStatsBoxRow"><h5 id = "createdDate">Member Since: <%=@current_user_account[:created_at].strftime("%D %r") %></h5></div>
+        <div class = "personalStatsBoxRow"><h5 id = "lastActive">Active Since: <%=@current_user_account[:updated_at].strftime("%D %r") %></h5></div>
         <div class = "personalStatsBoxRow"><button id = "editAccountInfoButton">Edit Account Information</button></div>
     </div>
 
@@ -74,9 +74,9 @@
 
     <section id = "postMasterWrapper">
         <div id = "postSectionHeader">
-            <h1 id = "postCount">Posts [<%=@user_posts.size%>]</h1>
+            <h1 id = "postCount">posts [<%=@user_posts.size%>]</h1>
             <div id = "filterMenuWrapper">
-                <p>Filter By:</p>
+                <p>filter by:</p>
                 <div id = "filterTagsWrapper">
                     <% @hashtagsTable.each do |hashtag_record| %>
                         <div class = "hashOptionsWrapper">
@@ -90,17 +90,17 @@
         </div>
         <div id = "newPostEditorWrapper">
             <div class = "editorRow" id = "newPostEditorTitleRow">
-                <h1 class = "editorCaption">Title:</h1><input id = "newPostTitleInput" class = "editorInput">
+                <h1 class = "editorCaption">title:</h1><input id = "newPostTitleInput" class = "editorInput">
             </div>
             <div class = "editorRow" id = "newPostEditorContentRow">
-                <h1 class = "editorCaption">Content:</h1>
+                <h1 class = "editorCaption">content:</h1>
                 <textarea id = "newPostContentInput" class = "editorInput"></textarea>
             </div>
             <div class = "editorRow" id = "newPostEditorButtonsRow">
-                <button id = "submitNewPostButton">Submit</button>
+                <button id = "submitNewPostButton">submit</button>
             </div>
             <div class = "editorRow" id = "newPostEditorTagsRow">
-                <h3 class = "editorCaption">Add Tags:</h3>
+                <h3 class = "editorCaption">add tags:</h3>
                 <div id = "editorTagsWrapper">
                     <% @hashtagsTable.each do |hashtag_record| %>
                         <div class = "editorTagsOption">
@@ -116,9 +116,15 @@
                 <div class = "postWrapper">
                     <h1><%=post[:post_title]%></h1>
                     <textarea disabled><%=post[:content]%></textarea>
-                    <button id = <%= post[:id]  %> class = "deletePostButton">Delete Post</button>
-                    <p>Created on: <%=post[:created_at]%></p>
-                    <p id = "tagHolder">Tags: </p>
+                    <button id = <%= post[:id] %>d class = "deletePostButton">Delete Post</button>
+                    <button id = <%= post[:id] %>u class = "updatePostButton">Edit Post</button>
+                    <p>Created on: <%=post[:created_at].strftime("%D %r")%></p>
+                    <% tags = [] %>
+                    <% @hashtagsJoin.where("post_id = ?", post.id).each do |hashtag| %>
+                        <% tags.push(@hashtagsTable.find(hashtag.hashtag_id).hashtag) %>    
+                    <% end %>
+                    <p id = "tagHolder">Tags: <%= tags.to_s.tr("[]", "") %> </p>
+
                 </div>
             <% end %>
         <% end %>

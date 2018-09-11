@@ -1,0 +1,51 @@
+<head>
+    <meta charset="UTF-8">
+    <title>dashboard</title>
+    <link rel="stylesheet" href="<%= url('style-dashboard.css')%>">
+</head>
+<body>
+    <nav>
+        <h1 id = "leftHandNavHeading">dashboard</h1>
+        <div id = "rightHandNavHeading">
+            <a href = "/feed"><h3 class = "rightNavItem">feed</h3></a>
+            <a href = ""><h3 class = "rightNavItem">followers</h3></a>
+            <h3 id = "logOut" class = "rightNavItem">log out</h3>
+        </div>
+    </nav>
+
+
+    <div id = "personalStatsBox">
+        <div class = "personalStatsBoxRow"><h5>Username: <%= @user_to_view.email %></h5></div>
+        <div class = "personalStatsBoxRow"><h5>First Name: <%= @user_to_view.first_name %></h5></div>
+        <div class = "personalStatsBoxRow"><h5>Last Name: <%= @user_to_view.last_name %></h5></div>
+        <div class = "personalStatsBoxRow"><h5 id = "createdDate">Member Since: <%= @user_to_view.created_at.strftime("%D %r") %></h5></div>
+        <div class = "personalStatsBoxRow"><h5 id = "lastActive">Last Active: <%= @user_to_view.updated_at.strftime("%D %r") %></h5></div>
+    </div>
+
+    <div id = "newPostButtonBox">
+        <button data-user = "<%= @user_to_view.id %>" id = "newPostStartButton"><%= @is_following %></button>
+    </div>
+
+    <ul id = "userPosts">
+        <h1>posts [<%= @user_posts.size %>]</h1>
+        <% @user_posts.each do |post|%>
+            <li>
+                <a href = "/posts/<%= post.id %>"><h3><%= post.post_title %> </h3></a>
+                <h4>Tags: <%= @post_tags[post.id].join(",") %></h4>
+            </li>
+        <% end %>
+    </ul>
+
+
+
+<!-- particles.js container --> 
+<div id="particles-js"></div> 
+<!-- particles.js lib - https://github.com/VincentGarreau/particles.js -->
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type = "text/javascript" src="<%= url('script-user.js') %>"></script> 
+<style>
+    .count-particles{display: none !important;}
+</style>
+
+</body>

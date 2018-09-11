@@ -19,7 +19,6 @@ document.getElementById("logOut").addEventListener("click", ()=>{
 
 //DISPLAY LAST TIMES IN LOCAL FORMAT------------------------------
 document.addEventListener("DOMContentLoaded", ()=> {
-    displayTimes();
     for (let x = 0; x < document.getElementsByClassName("accountChangeCheckBox").length; x++) {
         document.getElementsByClassName("accountChangeCheckBox")[x].addEventListener("change", ()=>{
             if (document.getElementsByClassName("accountChangeCheckBox")[x].previousElementSibling.getAttribute("disabled")) {
@@ -37,7 +36,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
     let fadeIn = setInterval(()=>{
         op += .025;
         document.body.style.opacity = `${op}`;
-        if (op === 1) {
+        if (op >= 1) {
             clearInterval(fadeIn);
         }
     },10);
@@ -47,8 +46,6 @@ document.addEventListener("DOMContentLoaded", ()=> {
             let confirmPostDelete = confirm("Are you sure you want to delete this post?");
             if (confirmPostDelete) {
                 axios.post('/posts-portal', {
-    
-                    
                     command: "DELETE",
                     post_to_delete: parseInt(document.getElementsByClassName("deletePostButton")[x].id)
                     
@@ -59,6 +56,40 @@ document.addEventListener("DOMContentLoaded", ()=> {
             }
         });
     }
+
+    for (let x = 0; x < document.getElementsByClassName("updatePostButton").length; x++) {
+        document.getElementsByClassName("updatePostButton")[x].addEventListener("click", ()=>{
+            if (document.getElementsByClassName("updatePostButton")[x].innerHTML === "Edit Post") {
+                document.getElementsByClassName("updatePostButton")[x].innerHTML = "Submit";
+                document.getElementsByClassName("updatePostButton")[x].parentElement.children[1].disabled = false;
+                document.getElementsByClassName("updatePostButton")[x].parentElement.children[1].style.backgroundColor = "orange";
+
+                for (let y = 1; y < document.getElementsByTagName("textarea").length; y++) {
+                    if (document.getElementsByClassName("updatePostButton")[x].parentElement.children[1] !== document.getElementsByTagName("textarea")[y]) {
+                        document.getElementsByTagName("textarea")[y].disabled = true;
+                        document.getElementsByTagName("textarea")[y].style.backgroundColor = "";
+                        document.getElementsByTagName("textarea")[y].parentElement.children[3].innerHTML = "Edit Post";
+                        
+                    }
+                }
+            }
+            else {
+                let updatePostDelete = confirm("Are you sure you want to update this post?");
+                if (updatePostDelete) {
+                    axios.post('/posts-portal', {
+                        command: "UPDATE",
+                        post_to_update: parseInt(document.getElementsByClassName("updatePostButton")[x].id),
+                        new_content: document.getElementsByClassName("updatePostButton")[x].parentElement.children[1].value,
+                      })
+                      .then((response) => {
+                        location.reload();
+                    });
+                }
+            }
+
+        });
+    }
+
 });
 //----------------------------------------------------------------
 
@@ -184,7 +215,6 @@ document.getElementById("submitNewPostButton").addEventListener("click", ()=>{
             post_content: document.getElementById("newPostContentInput").value,
             command: "CREATE",
             user_added_tags: userAddedTags
-            
           })
           .then((response) => {
             if (response.data.code === "POST ADDED" || response.data.code === "POST ADDED WITH TAGS") {
@@ -204,29 +234,52 @@ document.getElementById("submitNewPostButton").addEventListener("click", ()=>{
               }
         });
     }
-    
+});
+//----------------------------------------------------------------
 
+//FILTER POSTS----------------------------------------------------
+document.getElementById("filterButtonGo").addEventListener("click", ()=>{
+    if (document.getElementById("postMasterWrapper").children.length > 2) {
+        let checkedTags = [];
+        for (let x = 0 ; x < document.getElementsByClassName("hashOptionsWrapper").length; x++) {
+            if (document.getElementsByClassName("hashOptionsWrapper")[x].children[1].checked) {
+                checkedTags.push(document.getElementsByClassName("hashOptionsWrapper")[x].firstElementChild.innerText);
+            }
+        }
 
+        if (checkedTags.length === 0) {
+            for (let x = 0; x < document.getElementsByClassName("postWrapper").length; x++) {
+                document.getElementsByClassName("postWrapper")[x].style.visibility = "visibile";
+            }    
+        }
 
-
-
+        console.log(checkedTags);
+        
+        for (let x = 0; x < document.getElementsByClassName("postWrapper").length; x++) {
+            let shouldHide = 0;
+            for (let y = 0; y < checkedTags.length; y++) {
+                console.log(document.getElementsByClassName("postWrapper")[x].children[5].innerHTML.replace("Tags:", "").replace(/[""]/g, "").split(",").map(x => x.trim()));
+                if (document.getElementsByClassName("postWrapper")[x].children[5].innerHTML.replace("Tags:", "").replace(/[""]/g, "").split(",").map(x => x.trim()).includes(checkedTags[y])) {
+                    shouldHide ++;
+                }
+            }
+            console.log(shouldHide);
+            if (shouldHide !== checkedTags.length) {
+                document.getElementsByClassName("postWrapper")[x].style.display = "none";
+            }
+            else {
+                document.getElementsByClassName("postWrapper")[x].style.display = "flex";
+            }
+        }
+    }
+    else {
+        alert("Cannot filter posts that do not exist.");
+    }
 });
 //----------------------------------------------------------------
 
 
-
-
-
-
-
-
-
-
-
-
-
 //FUNCTIONS-----------------------------------------------------
-
 let displayTimes = () => {
     //Display Created Date
     let rawDateCreatedDate = document.getElementById("createdDate").innerText;

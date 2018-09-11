@@ -1,0 +1,78 @@
+<head>
+    <meta charset="UTF-8">
+    <title>dashboard</title>
+    <link rel="stylesheet" href="<%= url('style-feed.css')%>">
+</head>
+
+<body>
+    <nav>
+        <h1 id = "leftHandNavHeading">feed</h1>
+        <div id = "rightHandNavHeading">
+            <a href = "/dashboard"><h3 class = "rightNavItem">dashboard</h3></a>
+            <a href = "/friends"><h3 class = "rightNavItem">followers</h3></a>
+            <h3 id = "logOut" class = "rightNavItem">log out</h3>
+        </div>
+    </nav>
+
+    <section id = "sitewidePostsHolder">
+        <h2>Most Recent Sitewide Posts</h2>
+        <ul id = "sitewidePostsList">
+            <% @sitewidePosts.each do |post| %>
+                <li>
+                    <a href = "/posts/<%=post.id%>" > 
+                    <h4><%= post.post_title %></h4><br>
+                    <% if @currentUserID === post.user_id %>
+                        <h5>by Me</h5><br>
+                    <% else %>
+                        <h5>by <%= @sitewideUsers.find(post.user_id).email %></h5><br>
+                    <% end %>
+                    </a>
+                </li>
+            <% end %>
+        </ul>
+    </section>
+
+    <section id = "sitewideUsersHolder">
+        <h2>All Users</h2>  
+        <input type= "text" class="search" placeholder = "Search for users here">
+        <ul class = "list" id = "sitewideUsersList">
+            <% @sitewideUsers.each do |users| %>
+                <li> 
+                    <a href = "/users/<%= users.id %>"><h4 class = "name"><%=users.email%></h4></a>
+                </li>
+            <% end %>
+        </ul>
+    </section>
+
+    <section id = "followedPosts">
+        <h2>Posts by Followed Users</h2> 
+        <ul id = "followedPostsList">
+            <% @followed_posts.each do |key, value| %>
+                <% value.each do |post|%>
+                    <li> 
+                        <a href = "/posts/<%= post.id %>">
+                            <h4><%= post.post_title %></h4><br>
+                            <h5>by <%= Account.find(key).email %></h5>
+                        </a>
+                    </li>
+                <% end %>
+            <% end %>
+        </ul> 
+    </section>
+
+
+
+
+<!-- particles.js container --> 
+    <div id="particles-js"></div> 
+<!-- particles.js lib - https://github.com/VincentGarreau/particles.js -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type = "text/javascript" src="<%= url('script-feed.js') %>"></script>
+<style>
+    .count-particles{display: none !important;}
+</style>
+
+</body>

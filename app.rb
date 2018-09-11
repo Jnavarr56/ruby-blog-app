@@ -135,17 +135,16 @@ get "/dashboard" do
 
         @hashtagsTable = Hashtag.all
 
+        @hashtagsJoin = Hashtag_Join.all
+
+
         @user_posts = Post.where("user_id = ?", session[:current_user_id])
         puts @user_posts.inspect 
         
 
         @user_posts = @user_posts.order(created_at: :desc)
         
-        
-        
-
-
- 
+         
         erb :dashboard
     else
         redirect "/"
@@ -366,8 +365,6 @@ get "/verify-delete-account/:verify_delete_code_from_email" do
     #LOCATE ACCOUNT USING PARAM, ACCOUNT.DESTROY, RENDER ERB, LOGOUT
     #FIX TABLES
 
-     
-
     puts "--------ACCOUNT TO DELETE LOCATED-----------"
     account_to_delete = Account.find_by(verify_code: params[:verify_delete_code_from_email])
 
@@ -395,7 +392,7 @@ post "/posts-portal" do
     if user_input[:command] === "CREATE"
         if user_input[:user_added_tags] === nil
             Post.create(user_id: session[:current_user_id], post_title: user_input[:post_title], content: user_input[:post_content])
-            #ADD HASHTAG JOIN
+                        
             $posting_return_message = {:code => "POST ADDED"}
         else
             Post.create(user_id: session[:current_user_id], post_title: user_input[:post_title], content: user_input[:post_content])
@@ -407,6 +404,14 @@ post "/posts-portal" do
         end
     end
 
+    if user_input[:command] === "UPDATE"
+        puts "HERE"
+        updated_post = Post.find_by(id: user_input[:post_to_update])
+        updated_post.content = user_input[:new_content]
+        updated_post.save
+        puts "Updated Post"
+    end
+
     if user_input[:command] === "DELETE"
         puts user_input
         Post.find(user_input[:post_to_delete]).destroy
@@ -416,4 +421,95 @@ post "/posts-portal" do
     
     content_type :json
     $posting_return_message.to_json
+end
+
+get "/feed" do
+    if session[:current_user_id] ===  nil
+        redirect "/"
+    else
+        @sitewidePosts = Post.all
+        @sitewidePosts = @sitewidePosts.order(created_at: :desc)
+
+        
+        @sitewideUsers = Account.all
+        @sitewideUsers = @sitewideUsers.order(created_at: :desc)
+
+        @currentUserID = session[:current_user_id]
+        
+        @followed_users = Follower.where("following_user_id = ?", @currentUserID)
+
+        @followed_posts = {}
+        @followed_users.each do |follow|
+            @followed_posts[follow.followed_user_id] = Post.where(user_id: follow.followed_user_id)
+        end
+
+        puts @followed_posts.inspect
+        
+        
+
+        erb :feed
+    end
+end
+
+get "/posts/:post_id" do
+    if session[:current_user_id] ===  nil
+        redirect "/"
+    else
+        @current_post = Post.find(params[:post_id])
+        @author = Account.find(@current_post.user_id)
+
+        @tags = []
+        Hashtag_Join.where(post_id: params[:post_id]).each do |tag|
+            @tags.push(Hashtag.find(tag.hashtag_id).hashtag)
+        end
+
+        erb :post
+    end
+end
+
+get "/users/:view_user_id" do
+    if session[:current_user_id] ===  nil
+        redirect "/"
+    elsif params[:view_user_id].to_i === session[:current_user_id].to_i
+        redirect "/"
+    else
+        @user_to_view = Account.find(params[:view_user_id])
+        @user_posts = Post.where("user_id = ?", params[:view_user_id])
+
+        @post_tags = {}
+
+        @user_posts.each do |post|
+            tags = []
+            Hashtag_Join.where("post_id = ?", post.id).each do |join|
+                tags.push(Hashtag.find(join.hashtag_id).hashtag)
+            end
+            @post_tags[post.id] = tags
+        end
+
+        if Follower.find_by(:followed_user_id => @user_to_view.id, :following_user_id => session[:current_user_id]) === nil
+            @is_following = "Follow"
+        else
+            @is_following = "Unfollow"
+        end
+
+    
+        erb :user
+    end
+end
+
+post "/follow" do
+    if session[:current_user_id] ===  nil
+        redirect "/"
+    else
+        user_input = eval(request.body.read)
+        puts user_input
+
+        if user_input[:command] === "FOLLOW"
+            Follower.create(following_user_id: session[:current_user_id], followed_user_id: user_input[:user_to_follow])
+        else
+            Follower.find_by(following_user_id: session[:current_user_id], followed_user_id: user_input[:user_to_unfollow]).destroy
+        end 
+        
+    end
+
 end
