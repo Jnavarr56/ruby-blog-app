@@ -355,6 +355,7 @@ post "/delete-account-portal" do
             :to => current_user_account[:email],
             :subject => 'Delete Your Resist.io Account',
             :html_body => '<h1>Hey, you recently requested a deletion of your account.</h1><br><br><h3>This is irreversible. <br>Click <a href=' + route + '>here</a> to confirm the deletion.</h3>',
+            :via => :smtp,
             :via_options => {:port => '25'}
         )
         puts "--------------------------------------------"
