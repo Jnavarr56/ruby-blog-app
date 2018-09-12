@@ -85,15 +85,13 @@ post "/signup-data-portal" do #<---SIGN UP PAGE WITH VALIDATION
             end
         end
         Account.create(first_name: 'not set', last_name: 'not set', email: user_input[:new_username_input], password: user_input[:new_password_input], dob: user_input[:new_dob_input], time_logged: 'n/a', verify_code: verify_code_string, verified: false)
-        #route = '"http://localhost:4567/verify/' + verify_code_string + '"'
-        route = '"https://ruby-blog-resist.herokuapp.com/' + verify_code_string + '"'
+        route = '"http://localhost:4567/verify/' + verify_code_string + '"'
+        #route = '"https://ruby-blog-resist.herokuapp.com/' + verify_code_string + '"'
         Pony.mail(
             :from => 'resist@accounts.io',
-            
             :to => user_input[:new_username_input],
             :subject => 'Verify Your Resist.io Account',
-            :html_body => '<h1>Hey, you\'re almost there!</h1><br><h3>Click <a href=' + route + '>here</a> to verify your resist.io account.</h3>',
-            
+            :html_body => '<h1>Hey, you\'re almost there!</h1><br><h3>Click <a href=' + route + '>here</a> to verify your resist.io account.</h3>'     
         )
     end
     puts "------------------------------------"
@@ -274,15 +272,15 @@ post "/update-account-portal" do
     
     if $send_data_update_account[:code] === "USERNAME AVAILABLE"
         puts current_user_account[:update_code]
-        #route = '"http://localhost:4567/verify-update/' + current_user_account[:update_code] + '"'
-        route = '"https://ruby-blog-resist.herokuapp.com//verify-update/' + current_user_account[:update_code] + '"'
+        route = '"http://localhost:4567/verify-update/' + current_user_account[:update_code] + '"'
+        #route = '"https://ruby-blog-resist.herokuapp.com//verify-update/' + current_user_account[:update_code] + '"'
         
         Pony.mail(
             :from => 'resist@accounts.io',
             :to => current_user_account[:email],
+            :via => :smtp,
             :subject => 'Update Your Resist.io Account',
             :html_body => '<h1>Hey, you recently requested a change in account information:</h1><br><br><h3/>' + newAccountDataSummary + 'Click <a href=' + route + '>here</a> to confirm the changes.</h3>'
-            
         )
     end
 
@@ -348,8 +346,8 @@ post "/delete-account-portal" do
 
 
     if $send_data_delete_account[:code] === "PASSWORD CORRECT"
-        #route = '"http://localhost:4567/verify-delete-account/' + current_user_account[:verify_code] + '"'
-        route = '"https://ruby-blog-resist.herokuapp.com/' + current_user_account[:verify_code] + '"'
+        route = '"http://localhost:4567/verify-delete-account/' + current_user_account[:verify_code] + '"'
+        #route = '"https://ruby-blog-resist.herokuapp.com/' + current_user_account[:verify_code] + '"'
         
         puts "--------USER INPUT DELETION EMAIL-----------"
         puts "Sending delete confirm email with route:"
@@ -358,8 +356,7 @@ post "/delete-account-portal" do
             :from => 'resist@accounts.io',
             :to => current_user_account[:email],
             :subject => 'Delete Your Resist.io Account',
-            :html_body => '<h1>Hey, you recently requested a deletion of your account.</h1><br><br><h3>This is irreversible. <br>Click <a href=' + route + '>here</a> to confirm the deletion.</h3>'
-            
+            :html_body => '<h1>Hey, you recently requested a deletion of your account.</h1><br><br><h3>This is irreversible. <br>Click <a href=' + route + '>here</a> to confirm the deletion.</h3>' 
         )
         puts "--------------------------------------------"
     
