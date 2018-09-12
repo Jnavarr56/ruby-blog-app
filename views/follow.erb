@@ -15,22 +15,28 @@
     </nav>
 
     <div id = "followersHolder">
-        <ul>
-            <h1>Followers [<%= @followed_by.size %>]</h1>
+        <div id = "followersListHolder">
+        <h1>Followers [<%= @followed_by.size %>]</h1>
+        <input class = "search" placeholder = "Search followers here">
+        <ul class = "list"> 
             <% @followed_by.each do |followed_by| %>
                 <li>
-                    <a href = "/users/<%= followed_by.id %>"><h4><%= followed_by.email %></h4></a>
+                    <a class = "name" href = "/users/<%= followed_by.id %>"><h4><%= followed_by.email %></h4></a>
                 </li>
             <% end %>
         </ul>
-        <ul>
-            <h1>Following [<%= @following.size %>]</h1>
+        </div>
+        <div id = "followedListHolder">
+        <h1>Following [<%= @following.size %>]</h1>
+        <input class = "search" placeholder = "Search followed users here">
+        <ul class = "list">
             <% @following.each do |follow_me| %>
                 <li>
-                    <a href = "/users/<%= follow_me.id %>"><h4><%= follow_me.email %></h4></a>
+                    <a class = "name" href = "/users/<%= follow_me.id %>"><h4><%= follow_me.email %></h4></a>
                 </li>
             <% end %>
         </ul>
+        </div>
     </div>
 
 

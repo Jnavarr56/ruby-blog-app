@@ -225,7 +225,7 @@ h1, h3, h4, h5 {
         border-color: white;
         border-radius: 15px;
 
-        width: 40%;
+        width: 100%;
 
         color: white;
 
@@ -233,6 +233,23 @@ h1, h3, h4, h5 {
 
         li {
             a {color: white;} 
+        }
+    }
+    #followersListHolder, #followedListHolder {
+        height: 100%;
+        width: 40%;
+
+        input {
+            border-radius: 15px;
+            border-style: none;
+            
+            width: 60%;
+
+            text-indent: 10px;
+        }
+
+        h1 {
+            color: white;
         }
     }
 }

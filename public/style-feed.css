@@ -165,10 +165,20 @@ h1, h3, h4, h5 {
     border-style: solid;
     border-color: white;
     border-radius: 15px;
-    width: 40%;
+    width: 100%;
     color: white;
     overflow-y: scroll; }
     #followersHolder ul li a {
+      color: white; }
+  #followersHolder #followersListHolder, #followersHolder #followedListHolder {
+    height: 100%;
+    width: 40%; }
+    #followersHolder #followersListHolder input, #followersHolder #followedListHolder input {
+      border-radius: 15px;
+      border-style: none;
+      width: 60%;
+      text-indent: 10px; }
+    #followersHolder #followersListHolder h1, #followersHolder #followedListHolder h1 {
       color: white; }
 
 /*# sourceMappingURL=style-feed.css.map */

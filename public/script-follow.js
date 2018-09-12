@@ -26,5 +26,6 @@ document.addEventListener("DOMContentLoaded", ()=> {
         }
     },10);
 
-    //let userList = new List("sitewideUsersHolder", {valueNames: ["name"]});
+    let followersList = new List("followersListHolder", {valueNames: ["name"]});
+    let followedList = new List("followedListHolder", {valueNames: ["name"]});
 });
