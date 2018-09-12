@@ -85,7 +85,8 @@ post "/signup-data-portal" do #<---SIGN UP PAGE WITH VALIDATION
             end
         end
         Account.create(first_name: 'not set', last_name: 'not set', email: user_input[:new_username_input], password: user_input[:new_password_input], dob: user_input[:new_dob_input], time_logged: 'n/a', verify_code: verify_code_string, verified: false)
-        route = '"http://localhost:4567/verify/' + verify_code_string + '"'
+        #route = '"http://localhost:4567/verify/' + verify_code_string + '"'
+        route = '"https://ruby-blog-resist.herokuapp.com/' + verify_code_string + '"'
         Pony.mail(
             :from => 'resist@accounts.io',
             
@@ -273,7 +274,9 @@ post "/update-account-portal" do
     
     if $send_data_update_account[:code] === "USERNAME AVAILABLE"
         puts current_user_account[:update_code]
-        route = '"http://localhost:4567/verify-update/' + current_user_account[:update_code] + '"'
+        #route = '"http://localhost:4567/verify-update/' + current_user_account[:update_code] + '"'
+        route = '"https://ruby-blog-resist.herokuapp.com//verify-update/' + current_user_account[:update_code] + '"'
+        
         Pony.mail(
             :from => 'resist@accounts.io',
             :to => current_user_account[:email],
@@ -345,7 +348,9 @@ post "/delete-account-portal" do
 
 
     if $send_data_delete_account[:code] === "PASSWORD CORRECT"
-        route = '"http://localhost:4567/verify-delete-account/' + current_user_account[:verify_code] + '"'
+        #route = '"http://localhost:4567/verify-delete-account/' + current_user_account[:verify_code] + '"'
+        route = '"https://ruby-blog-resist.herokuapp.com/' + current_user_account[:verify_code] + '"'
+        
         puts "--------USER INPUT DELETION EMAIL-----------"
         puts "Sending delete confirm email with route:"
         puts route
