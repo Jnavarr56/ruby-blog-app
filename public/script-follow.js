@@ -27,6 +27,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
     },10);
 
     let followersList = new List("followersListHolder", {valueNames: ["name"]});
+
     
     let followedList = new List("followedListHolder", {valueNames: ["name"]});
 });
