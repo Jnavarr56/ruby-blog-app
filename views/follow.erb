@@ -1,18 +1,51 @@
-<ul>
-    <h1>Followers</h1>
-    <% @followed_by.each do |followed_by| %>
-        <li>
-            <a href = "/users/<%= followed_by.id %>"><h4><%= followed_by.email %></h4></a>
-        </li>
-    <% end %>
-</ul>
+<head>
+    <meta charset="UTF-8">
+    <title>dashboard</title>
+    <link rel="stylesheet" href="<%= url('style-feed.css')%>">
+</head>
+
+<body>
+    <nav>
+        <h1 id = "leftHandNavHeading">followers</h1>
+        <div id = "rightHandNavHeading">
+            <a href = "/dashboard"><h3 class = "rightNavItem">dashboard</h3></a>
+            <a href = "/feed"><h3 class = "rightNavItem">feed</h3></a>
+            <h3 id = "logOut" class = "rightNavItem">log out</h3>
+        </div>
+    </nav>
+
+    <div id = "followersHolder">
+        <ul>
+            <h1>Followers [<%= @followed_by.size %>]</h1>
+            <% @followed_by.each do |followed_by| %>
+                <li>
+                    <a href = "/users/<%= followed_by.id %>"><h4><%= followed_by.email %></h4></a>
+                </li>
+            <% end %>
+        </ul>
+        <ul>
+            <h1>Following [<%= @following.size %>]</h1>
+            <% @following.each do |follow_me| %>
+                <li>
+                    <a href = "/users/<%= follow_me.id %>"><h4><%= follow_me.email %></h4></a>
+                </li>
+            <% end %>
+        </ul>
+    </div>
 
 
-<ul>
-    <h1>Following</h1>
-    <% @following.each do |follow_me| %>
-        <li>
-            <a href = "/users/<%= follow_me.id %>"><h4><%= follow_me.email %></h4></a>
-        </li>
-    <% end %>
-</ul>
+
+<!-- particles.js container --> 
+    <div id="particles-js"></div> 
+<!-- particles.js lib - https://github.com/VincentGarreau/particles.js -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type = "text/javascript" src="<%= url('script-follow.js') %>"></script>
+<style>
+    .count-particles{display: none !important;}
+</style>
+
+</body>
+

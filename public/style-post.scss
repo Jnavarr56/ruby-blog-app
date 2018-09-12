@@ -36,6 +36,11 @@ body {
         display: flex;
         align-items: center;
         justify-content: space-between;
+
+        a {
+            color: black;
+            text-decoration: none;
+        }
         #rightHandNavHeading {
             display: flex;
             align-items: center;
