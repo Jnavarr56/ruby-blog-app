@@ -88,11 +88,11 @@ post "/signup-data-portal" do #<---SIGN UP PAGE WITH VALIDATION
         route = '"http://localhost:4567/verify/' + verify_code_string + '"'
         Pony.mail(
             :from => 'resist@accounts.io',
-            :via => :smtp,
+            
             :to => user_input[:new_username_input],
             :subject => 'Verify Your Resist.io Account',
             :html_body => '<h1>Hey, you\'re almost there!</h1><br><h3>Click <a href=' + route + '>here</a> to verify your resist.io account.</h3>',
-            :via_options => {:port => '25'}
+            
         )
     end
     puts "------------------------------------"
@@ -278,9 +278,8 @@ post "/update-account-portal" do
             :from => 'resist@accounts.io',
             :to => current_user_account[:email],
             :subject => 'Update Your Resist.io Account',
-            :html_body => '<h1>Hey, you recently requested a change in account information:</h1><br><br><h3/>' + newAccountDataSummary + 'Click <a href=' + route + '>here</a> to confirm the changes.</h3>',
-            :via => :smtp,
-            :via_options => {:port => '25'}
+            :html_body => '<h1>Hey, you recently requested a change in account information:</h1><br><br><h3/>' + newAccountDataSummary + 'Click <a href=' + route + '>here</a> to confirm the changes.</h3>'
+            
         )
     end
 
@@ -354,9 +353,8 @@ post "/delete-account-portal" do
             :from => 'resist@accounts.io',
             :to => current_user_account[:email],
             :subject => 'Delete Your Resist.io Account',
-            :html_body => '<h1>Hey, you recently requested a deletion of your account.</h1><br><br><h3>This is irreversible. <br>Click <a href=' + route + '>here</a> to confirm the deletion.</h3>',
-            :via => :smtp,
-            :via_options => {:port => '25'}
+            :html_body => '<h1>Hey, you recently requested a deletion of your account.</h1><br><br><h3>This is irreversible. <br>Click <a href=' + route + '>here</a> to confirm the deletion.</h3>'
+            
         )
         puts "--------------------------------------------"
     
