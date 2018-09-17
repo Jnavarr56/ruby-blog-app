@@ -104,12 +104,13 @@ post "/signup-data-portal" do #<---SIGN UP PAGE WITH VALIDATION
             :html_body => '<h1>Hey, you\'re almost there!</h1><br><h3>Click <a href=' + route + '>here</a> to verify your resist.io account.</h3>',     
             :via => :smtp, 
             :via_options => {
-              :host => 'smtp.gmail.com',
+              :address => 'smtp.gmail.com',
               :port => '587',
               :user_name => 'rubyblogresist@gmail.com',
               :password => 'Jorgean123',
               :auth => :plain,
-              :domain => 'localhost.localdomain'
+              :domain => 'localhost.localdomain',
+              :enable_starttls_auto => true,
              }
           }
 
