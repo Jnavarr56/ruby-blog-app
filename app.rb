@@ -85,14 +85,34 @@ post "/signup-data-portal" do #<---SIGN UP PAGE WITH VALIDATION
             end
         end
         Account.create(first_name: 'not set', last_name: 'not set', email: user_input[:new_username_input], password: user_input[:new_password_input], dob: user_input[:new_dob_input], time_logged: 'n/a', verify_code: verify_code_string, verified: false)
-        route = '"http://localhost:4567/verify/' + verify_code_string + '"'
-        #route = '"https://ruby-blog-resist.herokuapp.com/' + verify_code_string + '"'
-        Pony.mail(
+        #route = '"http://localhost:4567/verify/' + verify_code_string + '"'
+        
+        route = '"https://ruby-blog-resist.herokuapp.com/' + verify_code_string + '"'
+        /Pony.mail(
             :from => 'resist@accounts.io',
             :to => user_input[:new_username_input],
             :subject => 'Verify Your Resist.io Account',
             :html_body => '<h1>Hey, you\'re almost there!</h1><br><h3>Click <a href=' + route + '>here</a> to verify your resist.io account.</h3>'     
-        )
+        )/
+
+        @options = {
+            :to => user_input[:new_username_input],
+            :from => "rubyblogresist@gmail.com",
+            :subject => 'Verify Your Resist.io Account',
+            :html_body => '<h1>Hey, you\'re almost there!</h1><br><h3>Click <a href=' + route + '>here</a> to verify your resist.io account.</h3>',     
+            :via => :smtp, :smtp => {
+              :host => 'smtp.gmail.com',
+              :port => '25',
+              :user => 'rubyblogresist@gmail.com',
+              :password => 'Jorgean123',
+              :auth => :plain,
+              :domain => "heroku.com"
+             }
+          }
+
+
+        Pony.mail(@options)
+
     end
     puts "------------------------------------"
     content_type :json 
