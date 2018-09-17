@@ -126,6 +126,18 @@ end
 
 get "/verify/:verify_code_from_email" do
     #session[:current_user_id] = nil
+    
+    puts "---------"
+    puts "---------"
+    puts "---------"
+    puts "---------"
+    puts "---------"
+    puts params["verify_code_from_email"]
+    puts "---------"
+    puts "---------"
+    puts "---------"
+    puts "---------"
+
     @already_verified = false
     account_to_verify = Account.find_by(verify_code:   params["verify_code_from_email"])
     if account_to_verify[:verified] === true
