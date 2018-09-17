@@ -88,12 +88,14 @@ post "/signup-data-portal" do #<---SIGN UP PAGE WITH VALIDATION
         #route = '"http://localhost:4567/verify/' + verify_code_string + '"'
         
         route = '"https://ruby-blog-resist.herokuapp.com/' + verify_code_string + '"'
-        /Pony.mail(
+        =begin
+        Pony.mail(
             :from => 'resist@accounts.io',
             :to => user_input[:new_username_input],
             :subject => 'Verify Your Resist.io Account',
             :html_body => '<h1>Hey, you\'re almost there!</h1><br><h3>Click <a href=' + route + '>here</a> to verify your resist.io account.</h3>'     
-        )/
+        )
+        =end
 
         @options = {
             :to => user_input[:new_username_input],
