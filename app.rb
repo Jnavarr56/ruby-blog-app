@@ -87,7 +87,7 @@ post "/signup-data-portal" do #<---SIGN UP PAGE WITH VALIDATION
         Account.create(first_name: 'not set', last_name: 'not set', email: user_input[:new_username_input], password: user_input[:new_password_input], dob: user_input[:new_dob_input], time_logged: 'n/a', verify_code: verify_code_string, verified: false)
         #route = '"http://localhost:4567/verify/' + verify_code_string + '"'
         
-        route = '"https://ruby-blog-resist.herokuapp.com/' + verify_code_string + '"'
+        route = '"https://ruby-blog-resist.herokuapp.com/verify/' + verify_code_string + '"'
         
         #Pony.mail( 
             #:from => 'resist@accounts.io',
@@ -125,7 +125,7 @@ end
 
 
 get "/verify/:verify_code_from_email" do
-    session[:current_user_id] = nil
+    #session[:current_user_id] = nil
     @already_verified = false
     account_to_verify = Account.find_by(verify_code:   params["verify_code_from_email"])
     if account_to_verify[:verified] === true
@@ -313,7 +313,7 @@ post "/update-account-portal" do
 end
 
 get "/verify-update/:update_verify_code_from_email" do
-    session[:current_user_id] =  nil
+    #session[:current_user_id] =  nil
 
     puts "----RETRIEVING UPDATE CODE------------------"
     puts params[:update_verify_code_from_email]
@@ -394,7 +394,7 @@ end
 
 
 get "/verify-delete-account/:verify_delete_code_from_email" do
-    session[:current_user_id] =  nil
+    #session[:current_user_id] =  nil
     #LOCATE ACCOUNT USING PARAM, ACCOUNT.DESTROY, RENDER ERB, LOGOUT
     #FIX TABLES
 
