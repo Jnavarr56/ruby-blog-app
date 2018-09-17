@@ -102,7 +102,8 @@ post "/signup-data-portal" do #<---SIGN UP PAGE WITH VALIDATION
             :from => "rubyblogresist@gmail.com",
             :subject => 'Verify Your Resist.io Account',
             :html_body => '<h1>Hey, you\'re almost there!</h1><br><h3>Click <a href=' + route + '>here</a> to verify your resist.io account.</h3>',     
-            :via => :smtp, :smtp => {
+            :via => :smtp, 
+            :via_options => {
               :host => 'smtp.gmail.com',
               :port => '25',
               :user => 'rubyblogresist@gmail.com',
