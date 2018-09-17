@@ -105,11 +105,11 @@ post "/signup-data-portal" do #<---SIGN UP PAGE WITH VALIDATION
             :via => :smtp, 
             :via_options => {
               :host => 'smtp.gmail.com',
-              :port => '25',
+              :port => '587',
               :user_name => 'rubyblogresist@gmail.com',
               :password => 'Jorgean123',
               :auth => :plain,
-              :domain => "heroku.com"
+              :domain => 'localhost.localdomain'
              }
           }
 
